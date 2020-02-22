@@ -16,7 +16,9 @@ export class TasksService {
     return this.taskRepository.find();
   }
 
-  // getTasksWithFilter(filterDto: GetTasksFilterDto): Task[] {}
+  getTasks(filter: GetTasksFilterDto) {
+    return this.taskRepository.getTasks(filter);
+  }
 
   async getTaskById(id: number): Promise<Task> {
     const found = await this.taskRepository.findOne(id);
@@ -37,5 +39,10 @@ export class TasksService {
     }
   }
 
-  // updateTaskStatus(id: string, status: TaskStatus): Task | undefined {}
+  async updateTaskStatus(id: number, status: TaskStatus): Promise<Task> {
+    const task = await this.getTaskById(id);
+    task.status = status;
+    await task.save();
+    return task;
+  }
 }

@@ -23,14 +23,11 @@ import { TaskStatus } from './task-status.enum';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
-  // @Get()
-  // @UsePipes(ValidationPipe)
-  // getTasksWithFilter(@Query() filterDto: GetTasksFilterDto): Task[] {
-  //   if (Object.keys(filterDto).length) {
-  //     return this.tasksService.getTasksWithFilter(filterDto);
-  //   }
-  //   return this.tasksService.getAllTasks();
-  // }
+  @Get()
+  @UsePipes(ValidationPipe)
+  getTasksWithFilter(@Query() filterDto: GetTasksFilterDto) {
+    return this.tasksService.getTasks(filterDto);
+  }
 
   @Get(':id')
   getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
@@ -48,11 +45,11 @@ export class TasksController {
     return this.tasksService.deleteTaskById(id);
   }
 
-  // @Patch(':id/status')
-  // updateTaskStatus(
-  //   @Param('id') id: string,
-  //   @Body('status', TaskStatusValidationPipe) status: TaskStatus,
-  // ): Task | undefined {
-  //   return this.tasksService.updateTaskStatus(id, status);
-  // }
+  @Patch(':id/status')
+  updateTaskStatus(
+    @Param('id', ParseIntPipe) id: number,
+    @Body('status', TaskStatusValidationPipe) status: TaskStatus,
+  ): Promise<Task> {
+    return this.tasksService.updateTaskStatus(id, status);
+  }
 }

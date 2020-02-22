@@ -9,4 +9,5 @@ export const typeormConfig: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   entities: [__dirname + './../**/*.entity.js'],
   synchronize: true,
+  logging: 'all',
 };
