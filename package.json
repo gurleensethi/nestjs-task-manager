@@ -31,7 +31,7 @@
     "@types/passport": "^1.0.2",
     "@types/passport-jwt": "^3.0.3",
     "@types/uuid": "^3.4.7",
-    "bcrypt": "^4.0.0",
+    "bcrypt": "^5.0.0",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
     "config": "^3.2.6",
